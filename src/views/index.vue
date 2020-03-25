@@ -22,7 +22,7 @@
 
     <f7-block-title medium class="searchbar-found">Components</f7-block-title>
     <f7-list class="components-list searchbar-found">
-      <f7-list-item link="/accordion/" title="Accordion">
+      <f7-list-item link="/login/" title="Accordion">
         <f7-icon slot="media" icon="icon-f7"></f7-icon>
       </f7-list-item>
       <f7-list-item link="/action-sheet/" title="Action Sheet">
