@@ -62,7 +62,8 @@ const user = {
           shop: shopId,
           fetchToken: true,
         }).then(res => {
-          if (!res || res.code != 1 || !res.data.sessionId) {
+          if (!res.data.sessionId) {
+            console.log('reject')
             reject()
           } else {
             let data = res.data
@@ -75,8 +76,8 @@ const user = {
             commit('SET_LOGINNAME', data.loginName)
             commit('SET_USERID', data.userId)
             commit('SET_NAME', data.name)
+            resolve()
           }
-          resolve()
         }).catch(error => {
           reject(error)
         })

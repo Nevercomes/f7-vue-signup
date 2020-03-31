@@ -1,7 +1,4 @@
 <template>
-  <div class="app-container">
-    教师主页
-  </div>
 </template>
 
 <script>

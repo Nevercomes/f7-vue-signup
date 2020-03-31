@@ -1,53 +1,73 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-
-// Import Framework7 Bundle
-import Framework7 from 'framework7/framework7-lite.esm.bundle.js'
-import 'framework7/css/framework7.bundle.css'
-
-import '@/assets/styles/my-app.scss' // my app style
-import '@/assets/styles/f7-app.css' // f7 style
-
-// Import Framework7-Vue with all components
-import Framework7Vue from 'framework7-vue/framework7-vue.esm.bundle.js'
-
-// Init plugin and register all components
-Framework7.use(Framework7Vue)
+import router from './router'
 
 import {
-  f7
-} from 'framework7-vue'
+  Button,
+  Image,
+  Form,
+  Field,
+  Row,
+  Col,
+  Icon,
+  Picker,
+  Popup,
+  Calendar,
+  Notify,
+  Panel,
+  Cell,
+  CellGroup,
+  List,
+  PullRefresh
+} from 'vant';
 
-Vue.prototype.msgSuccess = function(msg) {
-  f7.toast.create({
-    icon: app.theme === 'ios' ? '<i class="f7-icons">checkmark_alt</i>' : '<i class="material-icons">checkmark_alt</i>',
-    text: msg,
-    position: 'center',
-    closeTimeout: 2000,
-  }).open()
-}
+Vue.use(Button)
+Vue.use(Image)
+Vue.use(Form)
+Vue.use(Field)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Icon)
+Vue.use(Picker)
+Vue.use(Popup)
+Vue.use(Calendar)
+Vue.use(Notify)
+Vue.use(Panel)
+Vue.use(Cell)
+Vue.use(CellGroup)
+Vue.use(List)
+Vue.use(PullRefresh)
 
-Vue.prototype.msgError = function(msg) {
-  f7.toast.create({
-    icon: app.theme === 'ios' ? '<i class="f7-icons">xmark</i>' : '<i class="material-icons">xmark</i>',
-    text: msg,
-    position: 'center',
-    closeTimeout: 2000,
-  }).open()
-}
-
-Vue.prototype.msgInfo = function(msg) {
-  f7.toast.create({
-    text: msg,
-    position: 'center',
-    closeTimeout: 2000,
-  }).open()
-}
+import '@/assets/styles/my-app.scss' // global style
+import '@/assets/styles/zhuoyue.scss' // 针对卓越提供的配色方案和样式
 
 Vue.config.productionTip = false
 
+Vue.prototype.hasMore = function(pageNo, pageSize, count) {
+  if (count == -1 || pageNo == 1) return true
+  if ((pageNo - 1) * pageSize >= count) {
+    return false
+  }
+  return true
+}
+
+Vue.prototype.msgSuccess = function(msg) {
+  this.$notify({
+    type: 'success',
+    message: msg
+  })
+}
+
+Vue.prototype.msgError = function(msg) {
+  this.$notify({
+    type: 'danger',
+    message: msg
+  })
+}
+
 new Vue({
+  router,
   store,
   render: h => h(App)
 }).$mount('#app')

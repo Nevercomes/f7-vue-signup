@@ -1,9 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
 import {
-  f7
-} from 'framework7-vue';
-import {
   getToken
 } from '@/utils/auth'
 
@@ -20,7 +17,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (getToken()) {
-      config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers['cookie'] = 'jeesite.session.id=' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config
   },
@@ -46,7 +43,7 @@ service.interceptors.response.use(res => {
         try {
           res.data = JSON.parse(res.data)
         } catch (e) {
-          console.log("not json data")
+          // console.log("not json data")
         }
       }
       // 后台多端杂糅要处理鉴权失败返回Json数据一直运行错误...请原谅我用这样一种吊诡的方式来处理这个问题
@@ -71,7 +68,7 @@ service.interceptors.response.use(res => {
       } else if (res.statusCode == 403 || res.data.code == '70001') {
         // fetch.toast('数据接口请求权限不足')
         return Promise.reject(res)
-      } else if (res.data.code != '200' && res.data.message != undefined) {
+      } else if (res.data.code != '1' && res.data.message != undefined) {
         // fetch.toast(res.data.message)
         return Promise.reject(res)
       } else {
