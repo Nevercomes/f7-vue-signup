@@ -2,8 +2,8 @@ $primary-btn-color: #d88e5d;
 $primary-bg-color: #375455;
 $form-invalid-color: red;
 
-$form-item-width: 13.5rem;
-$form-item-height: 24px;
+$form-item-width: 460px;
+$form-item-height: 48px;
 
 .signup__screen-bg-img {
   width: 100%;
@@ -16,19 +16,27 @@ $form-item-height: 24px;
    display: flex;
    flex-direction: column;
    align-items: center;
+   justify-content: space-between;
+}
+
+.ignore {
+	height: 60vh;
+	padding-top: 9vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .signup__form-item {
 	display: flex;
 	flex-direction: row;
 	align-self: center;
-	margin: 6px 0;
-	padding: 5px 0;
+	padding: 10px 0;
 	height: $form-item-height;
 	width: $form-item-width;
 	background-color: transparent;
-	border: 1px solid white;
-	border-radius: 17px;
+	border: 1Px solid white;
+	border-radius: 34px;
 }
 
 .signup__form-item--invalid {
@@ -39,39 +47,40 @@ $form-item-height: 24px;
 	position: relative;
 	display: flex;
 	align-self: center;
-	padding-left: 20px;
-	padding-right: 10px;
+	padding-left: 40px;
+	padding-right: 20px;
 	
 	.icon-decoration {
-		width: 14px;
-		height: 14px;
+		width: 28px;
+		height: 28px;
 		background-color: $primary-btn-color;
 		opacity: 0.7;
 		border-radius: 50%;
 		position: absolute;
-		left: 17px;
+		left: 34px;
 		bottom: 0;
 		z-index: -10;
 	}
 }
 
 .signup__form-divider {
-	width: 2px;
-	height: calc(100% - 10px);
-	padding: 5px 0;	
+	width: 1Px;
+	height: calc(100% - 20px);
+	padding: 10px 0;	
+	margin-right: 6px;
 	background-color: white;
 	opacity: 0.8;
 }
 
 .signup__form-input {
-	width: 7rem;
+	width: 270px;
 	// display: flex;
 	// flex-grow: 1;
 	background-color: transparent;
 	border: none;
 	caret-color: white;
 	color: white;
-	font-size: 12px;
+	font-size: 12Px;
 	padding: 0 10px;
 }
 
@@ -84,26 +93,25 @@ input::placeholder {
 .signup__form-select-icon {
 	display: flex;
 	align-items: center;
-	width: 1.4rem;
 }
 
 .signup__form-btn {
-	height:34px;
+	height: 68px;
 	width: $form-item-width;
 	color: white;
 	background-color: $primary-btn-color;
 	border: none;
-	border-radius: 15px;
-	font-size: 14px;
-	margin-top: 30px;
+	border-radius: 30px;
+	font-size: 28px;
+	margin-top: 60px;
 }
 
 .signup__form-footer {
 	width: $form-item-width;
-	font-size: 8px;
+	font-size: 16px;
 	color: white;
 	text-align: center;
-	margin-top: 5px;
+	margin-top: 10px;
 	opacity: 0.8;
 }
 

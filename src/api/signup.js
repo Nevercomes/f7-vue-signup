@@ -63,3 +63,28 @@ export function listSignup(query) {
     params: query
   })
 }
+
+export function toRedirect(param) {
+  return request({
+    url: '/f/signup/snsapi/student',
+    method: 'get',
+    params: param
+  })
+}
+
+export function getOpenId(code) {
+  return request({
+    url: '/f/signup/openId',
+    method: 'get',
+    params: {
+      code: code
+    }
+  })
+}
+
+export function getAreas() {
+  return request({
+    url: '/f/signup/area',
+    method: 'get'
+  })
+}

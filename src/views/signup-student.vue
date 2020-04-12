@@ -2,95 +2,109 @@
   <div class="app-container">
     <van-image class="signup__screen-bg-img" width="100%" height="100%" fit="cover" :src="signupBg" />
     <div class="signup__form">
-      <div class="signup__form-item" :class="[invalid.name ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="user-circle-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.name" type="text" placeholder="姓名" @blur="validInput($event, form.name)" />
-      </div>
+      <div class="ignore">
 
-      <div class="signup__form-item" :class="[invalid.shopid ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="location-o" color="white" size="20px" />
-          <div class="icon-decoration" />
+        <div class="signup__form-item" :class="[invalid.name ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="user-circle-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" v-model="form.name" type="text" placeholder="姓名" @blur="validInput($event, form.name)" />
         </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" :value="formDisplay.shop" type="text" readonly="readonly" placeholder="学习校区"
-          @click="shopPicker = true" />
-        <div class="signup__form-select-icon">
-          <van-icon name="arrow" color="white" size="20px" />
+
+        <div class="signup__form-item" :class="[invalid.shopid ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="location-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" :value="formDisplay.shop" type="text" readonly="readonly" placeholder="学习校区"
+            @click="shopPicker = true" />
+          <div class="signup__form-select-icon">
+            <van-icon name="arrow" color="white" size="20px" />
+          </div>
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.classtype ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="apps-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" :value="formDisplay.classType" type="text" readonly="readonly" placeholder="报名班种"
+            @click="classTypePicker = true" />
+          <div class="signup__form-select-icon">
+            <van-icon name="arrow" color="white" size="20px" />
+          </div>
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.school ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="wap-home-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input disabled class="signup__form-input" type="text" placeholder="就读学校" @click="showArea = true" />
+          <div class="signup__form-select-icon">
+            <van-icon name="arrow" color="white" size="20px" />
+          </div>
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.major ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="star-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" v-model="form.major" type="text" placeholder="在校专业" @blur="validInput($event, form.major)" />
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.enrollSchool ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="underway-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" v-model="form.gread" type="text" readonly="readonly" placeholder="入学时间"
+            @click="enrollPicker = true" />
+          <div class="signup__form-select-icon">
+            <van-icon name="arrow" color="white" size="20px" />
+          </div>
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.phone ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="phone-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" v-model="form.phone" type="text" placeholder="联系电话" @blur="validInput($event, form.phone)" />
+        </div>
+
+        <div class="signup__form-item" :class="[invalid.qq ? 'signup__form-item--invalid' : '']">
+          <div class="signup__form-icon">
+            <van-icon name="chat-o" color="white" size="20px" />
+            <div class="icon-decoration" />
+          </div>
+          <div class="signup__form-divider" />
+          <input class="signup__form-input" v-model="form.qq" type="text" placeholder="QQ号码" @blur="validInput($event, form.qq)" />
         </div>
       </div>
-
-      <div class="signup__form-item" :class="[invalid.classtype ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="apps-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" :value="formDisplay.classType" type="text" readonly="readonly" placeholder="报名班种"
-          @click="classTypePicker = true" />
-        <div class="signup__form-select-icon">
-          <van-icon name="arrow" color="white" size="20px" />
-        </div>
-      </div>
-
-      <div class="signup__form-item" :class="[invalid.school ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="wap-home-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.school" type="text" placeholder="就读学校" @blur="validInput($event, form.school)" />
-      </div>
-
-      <div class="signup__form-item" :class="[invalid.major ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="star-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.major" type="text" placeholder="在校专业" @blur="validInput($event, form.major)" />
-      </div>
-
-      <div class="signup__form-item" :class="[invalid.enrollSchool ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="underway-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.gread" type="text" readonly="readonly" placeholder="入学时间"
-          @click="enrollPicker = true" />
-        <div class="signup__form-select-icon">
-          <van-icon name="arrow" color="white" size="20px" />
-        </div>
-      </div>
-
-      <div class="signup__form-item" :class="[invalid.phone ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="phone-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.phone" type="text" placeholder="联系电话" @blur="validInput($event, form.phone)" />
-      </div>
-
-      <div class="signup__form-item" :class="[invalid.qq ? 'signup__form-item--invalid' : '']">
-        <div class="signup__form-icon">
-          <van-icon name="chat-o" color="white" size="20px" />
-          <div class="icon-decoration" />
-        </div>
-        <div class="signup__form-divider" />
-        <input class="signup__form-input" v-model="form.qq" type="text" placeholder="QQ号码" @blur="validInput($event, form.qq)" />
-      </div>
-
       <button class="signup__form-btn" @click="onSubmit">提 交 信 息</button>
       <div class="signup__form-footer">
         以上信息仅使用于卓越设计教育机构报名信息登记
       </div>
     </div>
+
+    <!-- 就读学校的选取 -->
+    <!-- <van-dialog v-model="showArea" title="就读学校">
+      <van-dropdown-item v-model="areaIndex" :options="showAreaList" />
+      <van-field v-model="form.school" placeholder="请输入学校名称"></van-field>
+    </van-dialog> -->
+    <van-dialog v-model="showArea" title="标题" show-cancel-button>
+      <img src="https://img.yzcdn.cn/vant/apple-3.jpg">
+    </van-dialog>
     <van-popup v-model="shopPicker" position="bottom">
       <van-picker show-toolbar :columns="shops" @cancel="shopPicker = false" @confirm="shopPickerConfirm" />
     </van-popup>
@@ -104,23 +118,32 @@
 </template>
 
 <script>
+  import mapGetters from 'vuex'
   import SignupBg from '@/assets/img/signup-bg.jpg'
   import {
     hasClass,
     addClass,
     removeClass,
-    isNullOrEmpty
+    isNullOrEmpty,
+    getQueryParam
   } from '@/utils/util.js'
 
   import {
     getSchools,
     getClassTypes,
     getPros,
-    saveSignup
+    saveSignup,
+    getOpenId,
+    getAreas
   } from '@/api/signup.js'
 
   export default {
     name: 'SignupStudent',
+    // computed: {
+    //   ...mapGetters({
+    //     'shopId'
+    //   })
+    // },
     data() {
       return {
         leadTeacher: '277d648ce0ba414f990dcd4b4c8d6022',
@@ -134,6 +157,11 @@
         classTypes: [],
         realClassTypes: [],
         classTypePicker: false,
+
+        areaList: [],
+        showAreaList: [],
+        showArea: false,
+        areaIndex: 0,
 
         pros: [],
         realPros: [],
@@ -159,12 +187,20 @@
       }
     },
     created() {
+      let state = getQueryParam('state')
+      if (!isNullOrEmpty(state)) {
+        state = state.split('&')
+        this.shopId = state[0]
+        this.leadTeacher = state[1]
+      }
       this.reset()
+      this.getOpenId()
       this.getSchools(this.shopId)
       this.getClassTypes(this.shopId)
       this.getPros(this.shopId)
       this.getClassTimes()
       this.initEnrollDate()
+      this.getAreas()
     },
     methods: {
       reset() {
@@ -176,12 +212,14 @@
           province: undefined,
           classTime: undefined,
           bmzy: undefined,
+          bmzyname: undefined,
           classtype: undefined,
           school: undefined,
           major: undefined,
           gread: undefined,
           phone: undefined,
-          qq: undefined
+          qq: undefined,
+          openId: undefined
         };
         this.formDisplay = {
           shop: undefined,
@@ -197,6 +235,12 @@
           phone: undefined,
           qq: undefined
         };
+      },
+      getOpenId() {
+        const code = getQueryParam('code')
+        getOpenId(code).then(res => {
+          this.form.openId = res.data
+        })
       },
       getSchools(shopId) {
         getSchools(shopId).then(res => {
@@ -250,6 +294,19 @@
           values: this.classTimes
         }
       },
+      getAreas() {
+        getAreas().then(res => {
+          this.areaList = res.data
+          this.showAreaList = []
+          for (let i in this.areaList) {
+            const area = this.areaList[i]
+            this.showAreaList.push({
+              text: area.name,
+              value: i
+            })
+          }
+        })
+      },
       initEnrollDate() {
         let year = new Date().getFullYear()
         this.enrollDates.push('已工作')
@@ -282,6 +339,7 @@
         this.formDisplay.classType = value[1] + '-' + value[2] + '-' + value[0]
         this.form.classtype = this.realClassTypes[index[2]].id
         this.form.bmzy = this.realPros[index[1]].id
+        this.form.bmzyname = this.formDisplay.classType
         this.form.classTime = value[0]
         this.invalid.classtype = false
         this.$forceUpdate()
@@ -343,7 +401,7 @@
           })
           this.$forceUpdate()
         } else {
-          if(!(/^1[3456789]\d{9}$/.test(this.form.phone))) {
+          if (!(/^1[3456789]\d{9}$/.test(this.form.phone))) {
             this.invalid.phone = true
             this.$notify({
               type: 'warning',

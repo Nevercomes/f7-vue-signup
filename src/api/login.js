@@ -7,3 +7,10 @@ export function login(info) {
     params: info
   })
 }
+
+export function toRedirect() {
+  return request({
+    url: '/f/signup/snsapi',
+    method: 'get'
+  })
+}

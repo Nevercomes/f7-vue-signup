@@ -94,7 +94,8 @@
           tuition: undefined,
           reserve: undefined,
           newOrOld: '',
-          discount: undefined
+          discount: undefined,
+          newUpdate: true
         }
       },
       getSignup(signupId) {

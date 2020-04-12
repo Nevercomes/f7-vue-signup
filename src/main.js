@@ -19,7 +19,14 @@ import {
   Cell,
   CellGroup,
   List,
-  PullRefresh
+  PullRefresh,
+  IndexBar,
+  IndexAnchor,
+  Dialog,
+  DropdownMenu,
+  DropdownItem,
+  Tab,
+  Tabs
 } from 'vant';
 
 Vue.use(Button)
@@ -38,9 +45,17 @@ Vue.use(Cell)
 Vue.use(CellGroup)
 Vue.use(List)
 Vue.use(PullRefresh)
+Vue.use(IndexBar)
+Vue.use(IndexAnchor)
+Vue.use(Dialog)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Tab)
+Vue.use(Tabs)
 
 import '@/assets/styles/my-app.scss' // global style
 import '@/assets/styles/zhuoyue.scss' // 针对卓越提供的配色方案和样式
+import './quasar'
 
 Vue.config.productionTip = false
 

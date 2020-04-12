@@ -7,6 +7,9 @@ import {
   getToken,
   setToken
 } from '@/utils/auth.js'
+import {
+  isNullOrEmpty
+} from '@/utils/util.js'
 
 const user = {
   state: {
@@ -49,9 +52,7 @@ const user = {
     }
   },
   actions: {
-    login({
-      commit
-    }, info) {
+    Login({ commit }, info) {
       const username = info.username.trim()
       const password = info.password
       const shopId = info.shopId
@@ -62,8 +63,9 @@ const user = {
           shop: shopId,
           fetchToken: true,
         }).then(res => {
-          if (!res.data.sessionId) {
-            console.log('reject')
+          console.log(res)
+          if (isNullOrEmpty(res.data.sessionId)) {
+            console.log('empty session id')
             reject()
           } else {
             let data = res.data
@@ -79,11 +81,12 @@ const user = {
             resolve()
           }
         }).catch(error => {
+          console.log(error)
           reject(error)
         })
       })
     },
-    wxLogin({
+    WxLogin({
       commit
     }, code) {
       return new Promise((resolve, reject) => {
@@ -118,7 +121,7 @@ const user = {
     },
 
     // 退出系统
-    logout({
+    Logout({
       commit,
       state
     }) {
