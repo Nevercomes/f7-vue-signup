@@ -45,7 +45,7 @@
             <div class="icon-decoration" />
           </div>
           <div class="signup__form-divider" />
-          <input disabled class="signup__form-input" type="text" placeholder="就读学校" @click="showArea = true" />
+          <input v-model="form.school" readonly class="signup__form-input" type="text" placeholder="就读学校" @click="showArea = true" />
           <div class="signup__form-select-icon">
             <van-icon name="arrow" color="white" size="20px" />
           </div>
@@ -98,12 +98,9 @@
     </div>
 
     <!-- 就读学校的选取 -->
-    <!-- <van-dialog v-model="showArea" title="就读学校">
-      <van-dropdown-item v-model="areaIndex" :options="showAreaList" />
+    <van-dialog v-model="showArea" title="就读学校">
+      <!-- <van-dropdown-item v-model="areaIndex" :options="showAreaList" /> -->
       <van-field v-model="form.school" placeholder="请输入学校名称"></van-field>
-    </van-dialog> -->
-    <van-dialog v-model="showArea" title="标题" show-cancel-button>
-      <img src="https://img.yzcdn.cn/vant/apple-3.jpg">
     </van-dialog>
     <van-popup v-model="shopPicker" position="bottom">
       <van-picker show-toolbar :columns="shops" @cancel="shopPicker = false" @confirm="shopPickerConfirm" />

@@ -1,0 +1,135 @@
+<template>
+  <div class="app-container">
+    <van-tabs v-model="active">
+      <van-tab title="生源地">
+        <table class="statistic__table">
+          <thead>
+            <tr>
+              <th>生源地</th>
+              <th>学生人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in areaData" :key="index">
+              <td>{{item.province}}</td>
+              <td>{{item.number}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </van-tab>
+      <van-tab title="校区">
+        <table class="statistic__table">
+          <thead>
+            <tr>
+              <th>校区</th>
+              <th>学生人数</th>
+              <th>市场人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in schoolData" :key="index">
+              <td>{{item.schoolName}}</td>
+              <td>{{item.studentNumber}}</td>
+              <td>{{item.teacherNumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </van-tab>
+      <van-tab title="专业">
+        <table class="statistic__table">
+          <thead>
+            <tr>
+              <th>专业</th>
+              <th>学生人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in proData" :key="index">
+              <td>{{item.proName}}</td>
+              <td>{{item.studentNumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </van-tab>
+      <van-tab title="时间轴">
+        <table class="statistic__table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>平时班人数</th>
+              <th>暑假班人数</th>
+              <th>寒假班人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in yearData" :key="index">
+              <td>{{item.year}}</td>
+              <td>{{item.normalNumber}}</td>
+              <td>{{item.summerNumber}}</td>
+              <td>{{item.winterNumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </van-tab>
+    </van-tabs>
+  </div>
+</template>
+
+<script>
+  import {
+    renderArea,
+    renderSchool,
+    renderPro,
+    renderYear
+  } from '@/api/statistic.js'
+
+  export default {
+    name: 'Statistic',
+    data() {
+      return {
+        areaData: [],
+        schoolData: [],
+        proData: [],
+        yearData: []
+      }
+    },
+    created() {
+      renderArea().then(res => {
+        this.areaData = res.data
+      })
+      renderSchool().then(res => {
+        this.schoolData = res.data
+      })
+      renderPro().then(res => {
+        this.proData = res.data
+      })
+      renderYear().then(res => {
+        this.yearData = res.data
+      })
+    },
+    methods: {
+
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+  .statistic__table {
+    padding: 20px;
+    width: 100%;
+
+    & thead {
+      padding: 15px 0;
+    }
+
+    & tr {
+      margin: 10px ;
+    }
+
+    & td {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+  }
+</style>
