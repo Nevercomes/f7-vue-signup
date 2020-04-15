@@ -1,5 +1,7 @@
+<!-- 学生报名信息详情页面 -->
 <template>
   <div class="app-container">
+    <van-nav-bar title="缴费详情" @click-left="onBack" left-arrow />
     <block-title :title="'学生信息'"></block-title>
     <van-panel :title="student.name" :desc="studentDesc">
       <div class="panel-content">
@@ -78,8 +80,8 @@
       },
       contact: function() {
         let phone = this.student.phone
-        if(!isNullOrEmpty(phone))
-          phone = phone.substr(0,3) + '-' + phone.substr(3,4) + '-' + phone.substr(7,4)
+        if (!isNullOrEmpty(phone))
+          phone = phone.substr(0, 3) + '-' + phone.substr(3, 4) + '-' + phone.substr(7, 4)
         return phone + " / " + this.student.qq
       }
     },
@@ -114,7 +116,7 @@
         this.student.newOrOld = this.form.newOrOld
         this.student.discount = this.form.discount
         updateSignup(this.student).then(res => {
-          if(res.code == 1) {
+          if (res.code == 1) {
             this.$notify({
               type: 'success',
               message: '报名信息修改成功'
@@ -130,6 +132,9 @@
       onConfirm(value, index) {
         this.form.newOrOld = value
         this.showPicker = false
+      },
+      onBack() {
+        this.$router.back()
       }
     }
   }

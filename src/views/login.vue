@@ -1,6 +1,8 @@
+<!-- 登录页面 -->
 <template>
   <div class="app-container">
-    <van-form @submit="signIn">
+    <van-nav-bar title="登录" />
+    <van-form @submit="signIn" style="margin-top: 30px;">
       <van-field v-model="form.username" label="用户名" type="text" name="username" placeholder="用户名" :rules="[{required: true, message: '请输入用户名'}]"
         @blur="getShops">
       </van-field>

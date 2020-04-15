@@ -1,3 +1,4 @@
+<!-- 教师通过消息点击进入的报名缴费信息填写页面 -->
 <template>
   <div class="app-container">
     <block-title :title="'学生信息'"></block-title>

@@ -1,5 +1,7 @@
+<!-- 数据舱-报名学生统计页面 -->
 <template>
   <div class="app-container">
+    <van-nav-bar title="报名统计"   />
     <van-tabs v-model="active">
       <van-tab title="生源地">
         <table class="statistic__table">
@@ -72,6 +74,20 @@
         </table>
       </van-tab>
     </van-tabs>
+    <van-tabbar route>
+      <!-- <van-tabbar-item replace to="/index/teacher" icon="home-o">
+        主页
+      </van-tabbar-item> -->
+      <van-tabbar-item replace to="/signup/list" icon="friends-o">
+        学生
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/signup/qr" icon="qr">
+        招生码
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/signup/statistic" icon="chart-trending-o">
+        统计
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -87,6 +103,7 @@
     name: 'Statistic',
     data() {
       return {
+        active: '0',
         areaData: [],
         schoolData: [],
         proData: [],
@@ -108,7 +125,9 @@
       })
     },
     methods: {
-
+      onBack() {
+        this.$router.back()
+      }
     }
   }
 </script>
@@ -123,7 +142,7 @@
     }
 
     & tr {
-      margin: 10px ;
+      margin: 10px;
     }
 
     & td {

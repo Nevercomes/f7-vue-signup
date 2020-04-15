@@ -1,3 +1,4 @@
+<!-- 学生报名信息页面 -->
 <template>
   <div class="app-container">
     <van-image class="signup__screen-bg-img" width="100%" height="100%" fit="cover" :src="signupBg" />
@@ -45,7 +46,7 @@
             <div class="icon-decoration" />
           </div>
           <div class="signup__form-divider" />
-          <input v-model="form.school" readonly class="signup__form-input" type="text" placeholder="就读学校" @click="showArea = true" />
+          <input v-model="form.school" class="signup__form-input" type="text" placeholder="就读学校" @blur="validInput($event, form.school)" />
           <div class="signup__form-select-icon">
             <van-icon name="arrow" color="white" size="20px" />
           </div>
@@ -98,10 +99,12 @@
     </div>
 
     <!-- 就读学校的选取 -->
-    <van-dialog v-model="showArea" title="就读学校">
-      <!-- <van-dropdown-item v-model="areaIndex" :options="showAreaList" /> -->
-      <van-field v-model="form.school" placeholder="请输入学校名称"></van-field>
-    </van-dialog>
+    <!-- <van-popup v-model="showArea" position="bottom">
+      <van-dropdown-menu>
+        <van-dropdown-item v-model="areaIndex" :options="showAreaList" />
+      </van-dropdown-menu>
+      <van-field label="学校" v-model="form.school" placeholder="请输入学校名称"></van-field>
+    </van-popup> -->
     <van-popup v-model="shopPicker" position="bottom">
       <van-picker show-toolbar :columns="shops" @cancel="shopPicker = false" @confirm="shopPickerConfirm" />
     </van-popup>
@@ -302,6 +305,7 @@
               value: i
             })
           }
+          console.log(this.showAreaList)
         })
       },
       initEnrollDate() {

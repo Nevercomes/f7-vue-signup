@@ -21,14 +21,14 @@
     display: flex;
     box-sizing: border-box;
     width: 100%;
-    padding: 10px 16px;
+    padding: 20px 32px;
     overflow: hidden;
     color: #323233;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 28px;
+    line-height: 48px;
     background-color: #fff;
   }
-  
+
   .block-cell__title {
     min-width: 20%;
   }

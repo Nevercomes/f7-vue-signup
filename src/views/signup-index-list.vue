@@ -1,5 +1,7 @@
+<!-- 教师下的报名学生的index索引列表 -->
 <template>
   <div class="app-container">
+    <van-nav-bar title="报名学生列表" />
     <van-index-bar :index-list="indexList">
       <div v-for="(item, idx) in indexList" :key="idx">
         <van-index-anchor :index="item">
@@ -8,6 +10,20 @@
         <van-cell v-for="obj in object[item]" :key="obj.id" @click="onClick(obj.id)">{{obj.name}}</van-cell>
       </div>
     </van-index-bar>
+    <van-tabbar route>
+      <!-- <van-tabbar-item replace to="/index/teacher" icon="home-o">
+        主页
+      </van-tabbar-item> -->
+      <van-tabbar-item replace to="/signup/list" icon="friends-o">
+        学生
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/signup/qr" icon="qr">
+        招生码
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/signup/statistic" icon="chart-trending-o">
+        统计
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -55,7 +71,7 @@
             id: id
           }
         })
-      }
+      },
     },
   }
 </script>

@@ -26,7 +26,12 @@ import {
   DropdownMenu,
   DropdownItem,
   Tab,
-  Tabs
+  Tabs,
+  Tabbar,
+  TabbarItem,
+  NavBar,
+  Overlay,
+  Loading 
 } from 'vant';
 
 Vue.use(Button)
@@ -52,6 +57,11 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Tab)
 Vue.use(Tabs)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(NavBar)
+Vue.use(Overlay)
+Vue.use(Loading)
 
 import '@/assets/styles/my-app.scss' // global style
 import '@/assets/styles/zhuoyue.scss' // 针对卓越提供的配色方案和样式
