@@ -38,9 +38,6 @@ const user = {
     SET_LOGINNAME: (state, loginName) => {
       state.loginName = loginName
     },
-    SET_TOKEN: (state, shopId) => {
-      state.shopId = shopId
-    },
     SET_ROLE: (state, role) => {
       state.role = role
     },
@@ -52,7 +49,9 @@ const user = {
     }
   },
   actions: {
-    Login({ commit }, info) {
+    Login({
+      commit
+    }, info) {
       const username = info.username.trim()
       const password = info.password
       const shopId = info.shopId
@@ -128,8 +127,13 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          commit('SET_PERMISSIONS', [])
+          commit('SET_SHOPID', '')
+          commit('SET_OPENID', '')
+          commit('SET_MEMBERID', '')
+          commit('SET_ROLE', '')
+          commit('SET_LOGINNAME', '')
+          commit('SET_USERID', '')
+          commit('SET_NAME', '')
           removeToken()
           resolve()
         }).catch(error => {

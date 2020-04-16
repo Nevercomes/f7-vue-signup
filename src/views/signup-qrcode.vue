@@ -32,15 +32,14 @@
     },
     computed: {
       ...mapGetters([
+        'userId',
         'shopId',
-        'userId'
+        'loginName'
       ])
     },
     created() {
-      const url = 'http://www.haitun158.com/signup'
-      console.log(this.shopId)
-      console.log(this.userId)
-      this.qrText = url + '?shopId=' + this.shopId + '&userId=' + this.userId
+      const url = 'http://haitun158.natapp1.cc/signup'
+      this.qrText = url + '?shopId=' + this.shopId + '&userId=' + this.userId + "&phone=" + this.loginName
     },
     data() {
       return {

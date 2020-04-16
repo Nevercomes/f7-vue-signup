@@ -6,8 +6,6 @@ $form-item-width: 460px;
 $form-item-height: 48px;
 
 .signup__screen-bg-img {
-  width: 100%;
-  height: 100%;
   z-index: -1000;
   position: absolute;
 }
@@ -20,8 +18,8 @@ $form-item-height: 48px;
 }
 
 .ignore {
-	height: 60vh;
-	padding-top: 9vh;
+	// height: 60vh;
+	// padding-top: 9vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

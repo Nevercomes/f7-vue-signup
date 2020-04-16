@@ -1,9 +1,9 @@
 <!-- 学生报名信息页面 -->
 <template>
   <div class="app-container">
-    <van-image class="signup__screen-bg-img" width="100%" height="100%" fit="cover" :src="signupBg" />
+    <van-image class="signup__screen-bg-img" :width="sWidth" :height="sHeight" fit="cover" :src="signupBg" ref="BackImage" />
     <div class="signup__form">
-      <div class="ignore">
+      <div class="ignore" ref="FormBox">
 
         <div class="signup__form-item" :class="[invalid.name ? 'signup__form-item--invalid' : '']">
           <div class="signup__form-icon">
@@ -47,9 +47,6 @@
           </div>
           <div class="signup__form-divider" />
           <input v-model="form.school" class="signup__form-input" type="text" placeholder="就读学校" @blur="validInput($event, form.school)" />
-          <div class="signup__form-select-icon">
-            <van-icon name="arrow" color="white" size="20px" />
-          </div>
         </div>
 
         <div class="signup__form-item" :class="[invalid.major ? 'signup__form-item--invalid' : '']">
@@ -183,7 +180,9 @@
         formDisplay: {},
         invalid: {},
 
-        signupBg: SignupBg
+        signupBg: SignupBg,
+        sHeight: undefined,
+        sWidth: undefined
       }
     },
     created() {
@@ -193,6 +192,8 @@
         this.shopId = state[0]
         this.leadTeacher = state[1]
       }
+      this.shopId = getQueryParam('shopId') || this.shopId
+      this.userId = getQueryParam('userId') || this.userId
       this.reset()
       this.getOpenId()
       this.getSchools(this.shopId)
@@ -201,6 +202,9 @@
       this.getClassTimes()
       this.initEnrollDate()
       this.getAreas()
+    },
+    mounted() {
+      this.setHeight()
     },
     methods: {
       reset() {
@@ -238,9 +242,11 @@
       },
       getOpenId() {
         const code = getQueryParam('code')
-        getOpenId(code).then(res => {
-          this.form.openId = res.data
-        })
+        if (!isNullOrEmpty(code)) {
+          getOpenId(code).then(res => {
+            this.form.openId = res.data
+          })
+        }
       },
       getSchools(shopId) {
         getSchools(shopId).then(res => {
@@ -305,7 +311,7 @@
               value: i
             })
           }
-          console.log(this.showAreaList)
+          // console.log(this.showAreaList)
         })
       },
       initEnrollDate() {
@@ -435,6 +441,16 @@
             })
           }
         }
+      },
+      setHeight() {
+        const sHeight = screen.height
+        const sWidth = screen.width
+        this.sHeight = sHeight
+        this.sWidth = sWidth
+        this.$refs.FormBox.style.height = sHeight * 0.6 + 'px'
+        this.$refs.FormBox.style.paddingTop = sHeight * 0.08 + 'px'
+        this.$refs.BackImage.style.height = sHeight + 'Px'
+        this.$refs.BackImage.style.width = sWidth + 'Px'
       }
     },
   }

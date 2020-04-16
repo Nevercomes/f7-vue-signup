@@ -17,6 +17,10 @@
         </van-button>
       </div>
     </van-form>
+    <!-- <van-overlay :show="loading">
+      <van-loading size="24px" vertical>登录中</van-loading>
+    </van-overlay> -->
+    <overlay-loading :show="loading" :text="'登录中...'"></overlay-loading>
     <van-popup v-model="showPicker" position="bottom">
       <van-picker show-toolbar :columns="shops" @confirm="onConfirm" @cancel="showPicker = false" />
     </van-popup>
@@ -25,6 +29,8 @@
 
 <script>
   import Cookies from "js-cookie";
+  import OverlayLoading from '@/components/OverlayLoading.vue'
+
   import {
     encrypt,
     decrypt
@@ -37,6 +43,9 @@
   } from '@/utils/util.js'
 
   export default {
+    components: {
+      OverlayLoading
+    },
     data() {
       return {
         loading: false,
@@ -60,9 +69,9 @@
     methods: {
       reset() {
         this.form = {
-          username: '',
-          password: '',
-          shopId: ''
+          username: '15211142974',
+          password: 'zhuoyue123',
+          shopId: '6cce39fe84c04d558d3fafd530f9b553'
         }
         this.displayForm = {
           shopName: ''
