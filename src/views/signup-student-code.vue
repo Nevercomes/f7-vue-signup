@@ -10,7 +10,7 @@
   import {
     getQueryParam
   } from '@/utils/util.js'
-  
+
   export default {
     created() {
       const shopId = getQueryParam('shopId')
@@ -23,7 +23,7 @@
           window.location.href = res.data
         } else {
           this.$router.push({
-            name: 'login'
+            name: 'signup'
           })
         }
       })

@@ -2,7 +2,7 @@
 <template>
   <div class="app-container">
     <block-title :title="'学生信息'"></block-title>
-    <van-panel :title="student.name" :desc="studentDesc" :status="'等待确认'">
+    <van-panel :title="student.name" :desc="studentDesc" :status="status">
       <div class="panel-content">
         <van-cell-group>
           <block-cell title="上课校区" :value="classShop" />
@@ -58,10 +58,11 @@
         ],
 
         showPicker: false,
+        status: '等待确认',
 
         form: {},
         student: {},
-        signupId: '7e8c0310d5784b3ebc3de9a9cb16db03'
+        signupId: ''
       }
     },
     computed: {
@@ -79,13 +80,14 @@
       },
       contact: function() {
         let phone = this.student.phone
-        if(!isNullOrEmpty(phone))
-          phone = phone.substr(0,3) + '-' + phone.substr(3,4) + '-' + phone.substr(7,4)
+        if (!isNullOrEmpty(phone))
+          phone = phone.substr(0, 3) + '-' + phone.substr(3, 4) + '-' + phone.substr(7, 4)
         return phone + " / " + this.student.qq
       }
     },
     created() {
       this.reset()
+      this.signupId = this.$route.query.signupId
       this.getSignup(this.signupId)
     },
     methods: {
@@ -110,11 +112,20 @@
         this.student.reserve = this.form.reserve
         this.student.newOrOld = this.form.newOrOld
         this.student.discount = this.form.discount
+        this.student.newUpdate = this.form.newUpdate
         updateSignup(this.student).then(res => {
-          if(res.code == 1) {
+          this.status = '已确认'
+          if (res.code == 1) {
             this.$notify({
               type: 'success',
               message: '报名缴费信息保存成功'
+            })
+            this.$router.push({
+              name: 'successPage',
+              query: {
+                title: '报名缴费信息填写成功',
+                message: '缴费信息填写成功，请尽快与学生取得联系'
+              }
             })
           } else {
             this.$notify({

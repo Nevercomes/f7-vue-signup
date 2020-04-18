@@ -3,6 +3,12 @@ import store from '@/store'
 import {
   getToken
 } from '@/utils/auth'
+import {
+  Dialog
+} from 'vant';
+import {
+  Toast
+} from 'vant'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -33,11 +39,11 @@ service.interceptors.response.use(res => {
     let statusCode = res.statusCode + ''
     let codeHead = statusCode.substring(0, 1)
     if (codeHead == '4' || codeHead == '5') {
-      // fetch.toast("数据请求失败")
+      Toast.fail('数据请求失败')
       return Promise.reject(res)
     } else {
       if (res.data == undefined) {
-        // fetch.toast("数据请求失败")
+        Toast.fail('数据请求失败')
         return Promise.reject(res)
       } else {
         try {
@@ -54,7 +60,7 @@ service.interceptors.response.use(res => {
       if (needLogin) {
         // uni.showModal({
         //   title: '登录异常',
-        //   content: '身份验证异常，请重新登录',
+        //   content: '身份验证已过期，请重新登录',
         //   showCancel: false,
         //   confirmColor: "#5677FC",
         //   confirmText: '确定',
@@ -64,12 +70,20 @@ service.interceptors.response.use(res => {
         //     })
         //   }
         // })
+        Dialog.alert({
+          title: '登录异常',
+          message: '身份验证已过期，请重新登录',
+        }).then(() => {
+          this.$router.push({
+            name: 'login'
+          })
+        });
         return Promise.reject(res)
       } else if (res.statusCode == 403 || res.data.code == '70001') {
-        // fetch.toast('数据接口请求权限不足')
+        Toast.fail('接口数据权限不足')
         return Promise.reject(res)
       } else if (res.data.code != '1' && res.data.message != undefined) {
-        // fetch.toast(res.data.message)
+        Toast.fail(res.data.message)
         return Promise.reject(res)
       } else {
         return res.data

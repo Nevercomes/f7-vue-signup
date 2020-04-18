@@ -334,3 +334,19 @@ export function getQueryParam(param) {
   }
   return (false);
 }
+
+export function parseQuery(str) {
+  if (str == undefined || str == '' || str == null) {
+    return undefined
+  }
+  let query = {}
+  str = decodeURIComponent(str)
+  str = str.split(',')
+  str.forEach(s => {
+    let q = s.split('$')
+    if (q.length == 2) {
+      query[q[0]] = q[1]
+    }
+  })
+  return query
+}

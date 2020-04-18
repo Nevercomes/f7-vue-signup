@@ -8,9 +8,18 @@ export function login(info) {
   })
 }
 
-export function toRedirect() {
+export function wxLogin(param) {
+  return request({
+    url: '/a/login',
+    method: 'get',
+    params: param
+  })
+}
+
+export function toRedirect(params) {
   return request({
     url: '/f/signup/snsapi',
-    method: 'get'
+    method: 'get',
+    params: params
   })
 }

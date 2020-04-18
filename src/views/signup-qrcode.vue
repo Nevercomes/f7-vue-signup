@@ -3,7 +3,8 @@
   <div class="app-container">
     <van-nav-bar title="招生码" />
     <div class="signup__code_box">
-      <vue-qr :logoSrc="imgUrl" class="sigup__qrcode" :text="qrText" :size="300"></vue-qr>
+      <!-- <vue-qr :logoSrc="imgUrl" class="sigup__qrcode" :text="qrText" :size="300"></vue-qr> -->
+      <vue-qr class="sigup__qrcode" :text="qrText" :size="300"></vue-qr>
     </div>
     <van-tabbar route>
       <!-- <van-tabbar-item replace to="/index/teacher" icon="home-o">
@@ -15,7 +16,7 @@
       <van-tabbar-item replace to="/signup/qr" icon="qr">
         招生码
       </van-tabbar-item>
-      <van-tabbar-item replace to="/signup/statistic" icon="chart-trending-o">
+      <van-tabbar-item v-if="role == 'manager'" replace to="/signup/statistic" icon="chart-trending-o">
         统计
       </van-tabbar-item>
     </van-tabbar>
@@ -34,11 +35,12 @@
       ...mapGetters([
         'userId',
         'shopId',
-        'loginName'
+        'loginName',
+        'role'
       ])
     },
     created() {
-      const url = 'http://haitun158.natapp1.cc/signup'
+      const url = 'http://haitun158.natapp1.cc/signup/code'
       this.qrText = url + '?shopId=' + this.shopId + '&userId=' + this.userId + "&phone=" + this.loginName
     },
     data() {

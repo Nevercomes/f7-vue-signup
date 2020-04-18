@@ -58,7 +58,7 @@
           <input class="signup__form-input" v-model="form.major" type="text" placeholder="在校专业" @blur="validInput($event, form.major)" />
         </div>
 
-        <div class="signup__form-item" :class="[invalid.enrollSchool ? 'signup__form-item--invalid' : '']">
+        <div class="signup__form-item" :class="[invalid.gread ? 'signup__form-item--invalid' : '']">
           <div class="signup__form-icon">
             <van-icon name="underway-o" color="white" size="20px" />
             <div class="icon-decoration" />
@@ -143,8 +143,8 @@
     // },
     data() {
       return {
-        leadTeacher: '277d648ce0ba414f990dcd4b4c8d6022',
-        shopId: '8e5d6871ec224bc792ce65b8f7a29213',
+        leadTeacher: '',
+        shopId: '',
         school: '',
 
         shops: [],
@@ -188,13 +188,15 @@
     created() {
       let state = getQueryParam('state')
       if (!isNullOrEmpty(state)) {
-        state = state.split('&')
-        this.shopId = state[0]
-        this.leadTeacher = state[1]
+        state = state.split('$')
+        if(state.length == 2) {
+          this.shopId = state[0]
+          this.leadTeacher = state[1]
+        }
       }
       this.shopId = getQueryParam('shopId') || this.shopId
-      this.userId = getQueryParam('userId') || this.userId
-      this.reset()
+      this.form.leadTeacher = getQueryParam('userId') || this.leadTeacher
+      // this.reset()
       this.getOpenId()
       this.getSchools(this.shopId)
       this.getClassTypes(this.shopId)
@@ -209,8 +211,8 @@
     methods: {
       reset() {
         this.form = {
-          shopid: this.shopId,
           leadTeacher: this.leadTeacher,
+          shopid: undefined,
           name: undefined,
           shopid: undefined,
           province: undefined,
@@ -235,9 +237,9 @@
           classtype: undefined,
           school: undefined,
           major: undefined,
-          enrollSchool: undefined,
           phone: undefined,
-          qq: undefined
+          qq: undefined,
+          gread: undefined
         };
       },
       getOpenId() {
@@ -328,7 +330,14 @@
           saveSignup(this.form).then(res => {
             this.$notify({
               type: 'success',
-              message: '提交信息成功，请您等待老师联系'
+              message: '提交信息成功，请等待老师与您联系'
+            })
+            this.$router.push({
+              name: 'successPage',
+              query: {
+                title: '报名信息提交成功',
+                message: '感谢你的报名，老师将尽快与你联系'
+              }
             })
           })
         }
@@ -354,7 +363,7 @@
       enrollPickerConfirm(value) {
         this.enrollPicker = false
         this.form.gread = value
-        this.invalid.enrollSchool = false
+        this.invalid.gread = false
         this.$forceUpdate()
       },
       validate() {
@@ -364,9 +373,9 @@
           classtype: undefined,
           school: undefined,
           major: undefined,
-          enrollSchool: undefined,
           phone: undefined,
-          qq: undefined
+          qq: undefined,
+          gread: undefined
         };
         let isInvalid = false
         if (isNullOrEmpty(this.form.name)) {
@@ -388,10 +397,6 @@
         if (isNullOrEmpty(this.form.major)) {
           isInvalid = true
           this.invalid.major = true
-        }
-        if (isNullOrEmpty(this.form.enrollSchool)) {
-          isInvalid = true
-          this.invalid.enrollSchool = true
         }
         if (isNullOrEmpty(this.form.phone)) {
           isInvalid = true

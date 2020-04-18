@@ -20,7 +20,7 @@
       <van-tabbar-item replace to="/signup/qr" icon="qr">
         招生码
       </van-tabbar-item>
-      <van-tabbar-item replace to="/signup/statistic" icon="chart-trending-o">
+      <van-tabbar-item v-if="role == 'manager'" replace to="/signup/statistic" icon="chart-trending-o">
         统计
       </van-tabbar-item>
     </van-tabbar>
@@ -32,9 +32,15 @@
   import {
     listSignup
   } from '@/api/signup.js'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'SignupIndexList',
+    computed: {
+      ...mapGetters([
+        'role'
+      ])
+    },
     data() {
       return {
         dataList: [],

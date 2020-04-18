@@ -55,11 +55,13 @@ const user = {
       const username = info.username.trim()
       const password = info.password
       const shopId = info.shopId
+      const openId = info.openId
       return new Promise((resolve, reject) => {
         login({
           username: username,
           password: password,
           shop: shopId,
+          openId: openId,
           fetchToken: true,
         }).then(res => {
           console.log(res)
@@ -91,7 +93,9 @@ const user = {
       return new Promise((resolve, reject) => {
         wxLogin({
           code: code,
+          fetchToken: true,
           fromWeChat: true,
+          fromFenXiao: true,
         }).then(res => {
           if (!res.data) {
             reject()
@@ -109,6 +113,8 @@ const user = {
               commit('SET_NAME', data.name)
               resolve()
             } else {
+              console.log('empty session id')
+              commit('SET_OPENID', res.data.openId)
               reject()
             }
           }

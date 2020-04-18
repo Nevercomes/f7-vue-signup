@@ -62,7 +62,7 @@
 
         form: {},
         student: {},
-        signupId: '7e8c0310d5784b3ebc3de9a9cb16db03'
+        signupId: ''
       }
     },
     computed: {
@@ -87,7 +87,6 @@
     },
     created() {
       this.signupId = this.$route.query && this.$route.query.id
-      this.reset()
       this.getSignup(this.signupId)
     },
     methods: {
@@ -101,6 +100,7 @@
         }
       },
       getSignup(signupId) {
+        this.reset()
         getSignup(signupId).then(res => {
           this.student = res.data
           this.form.id = res.data.id

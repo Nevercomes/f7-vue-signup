@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from '@/views/login.vue'
 import WxLogin from '@/views/login-wx.vue'
 import NotFound from '@/views/404.vue'
+import SuccessPage from '@/views/sys-success.vue'
 
 import Index from '@/views/index.vue'
 
@@ -34,6 +35,11 @@ export const constantRoutes = [
     path: '/404',
     name: '404',
     component: NotFound
+  },
+  {
+    path: '/success',
+    name: 'successPage',
+    component: SuccessPage
   },
   {
     path: '/index',

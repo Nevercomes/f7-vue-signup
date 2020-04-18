@@ -30,6 +30,9 @@
 <script>
   import Cookies from "js-cookie";
   import OverlayLoading from '@/components/OverlayLoading.vue'
+  import {
+    mapGetters
+  } from 'vuex'
 
   import {
     encrypt,
@@ -39,16 +42,24 @@
     getShops
   } from '@/api/shop.js'
   import {
-    getQueryParam
+    getQueryParam,
+    parseQuery
   } from '@/utils/util.js'
 
   export default {
     components: {
       OverlayLoading
     },
+    computed: {
+      ...mapGetters([
+        'openId'
+      ])
+    },
     data() {
       return {
         loading: false,
+        routerPath: 'signupList',
+        query: {},
 
         displayForm: {},
         form: {},
@@ -62,6 +73,10 @@
       this.reset()
       // 获取url中的code
       const code = getQueryParam('code')
+      this.routerPath = getQueryParam('router_path') || this.routerPath
+      this.query = parseQuery(getQueryParam('query')) || this.query
+      console.log(this.routerPath)
+      console.log(this.query)
       if (code) {
         this.wxLogin(code)
       }
@@ -71,7 +86,8 @@
         this.form = {
           username: '15211142974',
           password: 'zhuoyue123',
-          shopId: '6cce39fe84c04d558d3fafd530f9b553'
+          shopId: '6cce39fe84c04d558d3fafd530f9b553',
+          openId: ''
         }
         this.displayForm = {
           shopName: ''
@@ -79,13 +95,17 @@
       },
       signIn(values) {
         this.loading = true
+        this.form.openId = this.openId || ''
         this.$store
           .dispatch("Login", this.form)
           .then(() => {
             this.loading = false;
             this.msgSuccess('登录成功')
             this.$router.push({
-              name: 'signupList'
+              name: this.routerPath,
+              query: {
+                signupId: 'f60e70d58b2641c8810b35cca538fcfb'
+              }
             })
           })
           .catch((error) => {
@@ -100,11 +120,12 @@
           this.loading = false;
           this.msgSuccess('微信授权登录成功')
           this.$router.push({
-            name: 'signupList'
+            name: this.routerPath,
+            query: this.query
           })
         }).catch((error) => {
           console.log(error)
-          this.msgError('登录失败，用户名或密码错误')
+          this.msgError('微信授权登录失败，请使用账号密码登录')
           this.loading = false;
         });
       },

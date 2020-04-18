@@ -8,10 +8,20 @@
   import {
     toRedirect
   } from '@/api/login.js'
+  import {
+    getQueryParam,
+    isNullOrEmpty
+  } from '@/utils/util.js'
 
   export default {
     created() {
-      toRedirect().then(res => {
+      const path = getQueryParam('router_path') || 'signupList'
+      const query = getQueryParam('query') || ''
+      let param = {
+        router_path: path,
+        query: query
+      }
+      toRedirect(param).then(res => {
         if(res.data != undefined && res.data != '') {
           window.location.href = res.data
         } else {
