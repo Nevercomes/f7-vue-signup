@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import router from '@/router'
 import {
   getToken
 } from '@/utils/auth'
@@ -15,7 +16,9 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
+  // dev to prod
   baseURL: process.env.VUE_APP_BASE_API,
+  // baseURL: 'http://www.haitun158.com/HTMU/',
   // 超时
   timeout: 10000
 })
@@ -74,7 +77,7 @@ service.interceptors.response.use(res => {
           title: '登录异常',
           message: '身份验证已过期，请重新登录',
         }).then(() => {
-          this.$router.push({
+          router.push({
             name: 'login'
           })
         });
@@ -92,11 +95,14 @@ service.interceptors.response.use(res => {
   },
   error => {
     console.log('err' + error)
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
+    Dialog.alert({
+      title: '登录异常',
+      message: '身份验证已过期，请重新登录',
+    }).then(() => {
+      router.push({
+        name: 'wxLogin'
+      })
+    });
     return Promise.reject(error)
   }
 )

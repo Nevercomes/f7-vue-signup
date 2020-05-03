@@ -1,7 +1,7 @@
 <!-- 数据舱-报名学生统计页面 -->
 <template>
   <div class="app-container">
-    <van-nav-bar title="报名统计"   />
+    <van-nav-bar :title="title"   />
     <van-tabs v-model="active">
       <van-tab title="生源地">
         <table class="statistic__table">
@@ -105,7 +105,14 @@
     computed: {
       ...mapGetters([
         'role'
-      ])
+      ]),
+      title: function() {
+        let arr = []
+        arr.push('报名学生列表')
+        if (this.queryParams.year) arr.push(this.queryParams.year + '年')
+        if (this.shopName) arr.push(this.shopName)
+        return arr.join('-')
+      }
     },
     data() {
       return {
@@ -113,7 +120,10 @@
         areaData: [],
         schoolData: [],
         proData: [],
-        yearData: []
+        yearData: [],
+        queryParams: {
+          year: undefined
+        }
       }
     },
     created() {
@@ -129,6 +139,9 @@
       renderYear().then(res => {
         this.yearData = res.data
       })
+      // 获取当前时间
+      const now = new Date()
+      this.queryParams.year = now.getFullYear()
     },
     methods: {
       onBack() {

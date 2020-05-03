@@ -4,7 +4,6 @@
 </template>
 
 <script>
-
   import {
     toRedirect
   } from '@/api/login.js'
@@ -22,17 +21,23 @@
         query: query
       }
       toRedirect(param).then(res => {
-        if(res.data != undefined && res.data != '') {
+        if (res.data != undefined && res.data != '') {
           window.location.href = res.data
         } else {
           this.$router.push({
-            name: 'login'
+            name: 'login',
+            query: param
           })
         }
+      }).catch(() => {
+        this.msgError('微信授权登录失败，请使用账号密码登录')
+        this.$router.push({
+          name: 'login',
+          query: param
+        })
       })
     }
   }
-
 </script>
 
 <style>

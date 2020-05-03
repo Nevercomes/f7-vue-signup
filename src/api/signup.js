@@ -58,7 +58,7 @@ export function getSignup(id) {
 
 export function listSignup(query) {
   return request({
-    url: '/f/signup/list',
+    url: '/a/signup/simplelist',
     method: 'get',
     params: query
   })

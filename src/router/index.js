@@ -96,6 +96,8 @@ export const constantRoutes = [
 
 export default new Router({
   mode: 'history', // 去掉url中的#
+  // dev to prod
+  // base: '/fenxiao/',
   scrollBehavior: () => ({
     y: 0
   }),

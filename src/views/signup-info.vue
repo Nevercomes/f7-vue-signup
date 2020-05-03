@@ -67,22 +67,38 @@
     },
     computed: {
       finalTuition: function() {
-        return this.form.tuition ? this.form.tuition - this.form.reserve - this.form.discount : ''
+        return this.form.tuition && this.form.discount ?
+          this.form.tuition - this.form.reserve - this.form.discount :
+          ''
       },
       studentDesc: function() {
-        return this.student.school + '-' + this.student.major + '-' + this.student.gread
+        let arr = []
+        if (this.student.school) arr.push(this.student.school);
+        if (this.student.major) arr.push(this.student.major);
+        if (this.student.gread) arr.push(this.student.gread)
+        return arr.join('-')
       },
       classShop: function() {
-        return this.student.provincename + '-' + this.student.shopname
+        let arr = []
+        if (this.student.provincename) arr.push(this.student.provincename)
+        if (this.student.shopname) arr.push(this.student.shopname)
+        return arr.join('-')
       },
       classType: function() {
-        return this.student.classTime + '-' + this.student.bmzyname + '-' + this.student.classtypename
+        let arr = []
+        if (this.student.classTime) arr.push(this.student.classTime);
+        if (this.student.bmzyname) arr.push(this.student.bmzyname);
+        if (this.student.classtypename) arr.push(this.student.classtypename)
+        return arr.join('-')
       },
       contact: function() {
+        let arr = []
         let phone = this.student.phone
         if (!isNullOrEmpty(phone))
           phone = phone.substr(0, 3) + '-' + phone.substr(3, 4) + '-' + phone.substr(7, 4)
-        return phone + " / " + this.student.qq
+        if (phone) arr.push(phone)
+        if (this.student.qq) arr.push(this.student.qq)
+        return arr.join('/')
       }
     },
     created() {

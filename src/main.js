@@ -31,7 +31,8 @@ import {
   TabbarItem,
   NavBar,
   Overlay,
-  Loading 
+  Loading,
+  Empty
 } from 'vant';
 
 Vue.use(Button)
@@ -62,6 +63,7 @@ Vue.use(TabbarItem)
 Vue.use(NavBar)
 Vue.use(Overlay)
 Vue.use(Loading)
+Vue.use(Empty)
 
 import '@/assets/styles/my-app.scss' // global style
 import '@/assets/styles/zhuoyue.scss' // 针对卓越提供的配色方案和样式

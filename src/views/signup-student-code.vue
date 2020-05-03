@@ -19,13 +19,25 @@
         shopId: shopId,
         userId: userId
       }).then(res => {
-        if(res.data != undefined && res.data != '') {
+        if (res.data != undefined && res.data != '') {
           window.location.href = res.data
         } else {
           this.$router.push({
-            name: 'signup'
+            name: 'signup',
+            query: {
+              shopId: shopId,
+              userId: userId
+            }
           })
         }
+      }).catch(() => {
+        this.$router.push({
+          name: 'signup',
+          query: {
+            shopId: shopId,
+            userId: userId
+          }
+        })
       })
     }
   }

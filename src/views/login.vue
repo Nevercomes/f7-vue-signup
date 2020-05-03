@@ -85,8 +85,8 @@
       reset() {
         this.form = {
           username: '15211142974',
-          password: 'zhuoyue123',
-          shopId: '6cce39fe84c04d558d3fafd530f9b553',
+          password: '',
+          shopId: '',
           openId: ''
         }
         this.displayForm = {
