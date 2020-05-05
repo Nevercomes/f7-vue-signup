@@ -32,6 +32,7 @@ module.exports = {
   productionSourceMap: false,
 
   // webpack-dev-server 相关配置
+  // 在生产环境下通常用nginx来做代理转发,这里只有开发环境下支持
   devServer: {
     host: '0.0.0.0',
     port: port,

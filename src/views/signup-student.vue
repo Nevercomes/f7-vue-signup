@@ -111,6 +111,11 @@
     <van-popup v-model="enrollPicker" position="bottom">
       <van-picker show-toolbar :columns="enrollDates" @cancel="enrollPicker = false" @confirm="enrollPickerConfirm" />
     </van-popup>
+
+    <van-dialog style="text-align: center;" v-model="showQrCode" title="报名请先关注公众号,以接收确认通知">
+      <img style="width: 300Px; height: 300Px;" :src="qrCode" />
+    </van-dialog>
+
   </div>
 </template>
 
@@ -143,6 +148,8 @@
     // },
     data() {
       return {
+        qrCode: require('../assets/img/zhuoyue-qrcode.jpg'),
+        showQrCode: false,
         leadTeacher: '',
         shopId: '',
         school: '',
@@ -189,7 +196,7 @@
       let state = getQueryParam('state')
       if (!isNullOrEmpty(state)) {
         state = state.split('$')
-        if(state.length == 2) {
+        if (state.length == 2) {
           this.shopId = state[0]
           this.leadTeacher = state[1]
         }
@@ -246,7 +253,11 @@
         const code = getQueryParam('code')
         if (!isNullOrEmpty(code)) {
           getOpenId(code).then(res => {
-            this.form.openId = res.data
+            this.form.openId = res.data.openId
+            // 未关注公众号，弹窗显示卓越的二维码
+            if(!res.data.subscribe) {
+              this.showQrCode = true
+            }
           })
         }
       },

@@ -84,7 +84,7 @@
     methods: {
       reset() {
         this.form = {
-          username: '15211142974',
+          username: '',
           password: '',
           shopId: '',
           openId: ''

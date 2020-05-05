@@ -47,8 +47,8 @@
     },
     created() {
       // dev to prod
-      // const url = 'http://haitun158.natapp1.cc/signup/code'
-      const url = 'http://www.haitun158.com/fenxiao/signup/code'
+      const url = 'http://haitun158.natapp1.cc/signup/code'
+      // const url = 'http://www.haitun158.com/fenxiao/signup/code'
       this.qrText = url + '?shopId=' + this.shopId + '&userId=' + this.userId + "&phone=" + this.loginName
     },
     data() {
@@ -56,8 +56,8 @@
         imgUrl: require('../assets/img/code-default.jpg'),
         zhuoyueUrl: require('../assets/img/zhuoyue-qrcode.jpg'),
         qrText: '',
-        title: this.name ? this.name + '招生二维码' : '招生二维码',
-        qrcodeType: 'sign'
+        qrcodeType: 'sign',
+        title: this.name ? this.name + '招生二维码' : '招生二维码'
       }
     },
     methods: {

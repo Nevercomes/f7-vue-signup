@@ -19,6 +19,7 @@ const service = axios.create({
   // dev to prod
   baseURL: process.env.VUE_APP_BASE_API,
   // baseURL: 'http://www.haitun158.com/HTMU/',
+  // baseURL: 'http://localhost/HTMU/',
   // 超时
   timeout: 10000
 })
