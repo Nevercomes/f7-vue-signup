@@ -67,7 +67,7 @@ Vue.use(Empty)
 
 import '@/assets/styles/my-app.scss' // global style
 import '@/assets/styles/zhuoyue.scss' // 针对卓越提供的配色方案和样式
-import './quasar'
+// import './quasar'
 
 Vue.config.productionTip = false
 

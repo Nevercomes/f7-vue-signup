@@ -1,5 +1,5 @@
 module.exports = {
-  title: '分销系统',
+  title: '报名系统',
 
   /**
    * 是否系统布局配置
